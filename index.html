@@ -42,50 +42,50 @@
 		{ name: 'Ian "Opus" Napierkowski',            time: '18:07', begin: new Date(2017, 1, 18),  end: new Date() }
 	];
 
-function drawChart() {
+	function drawChart() {
+		var colorScale = new Plottable.Scales.Color();
 
-	var colorScale = new Plottable.Scales.Color();
+		var xScale = new Plottable.Scales.Time();
+		var xAxis = new Plottable.Axes.Time(xScale, "bottom");
 
-	var xScale = new Plottable.Scales.Time();
-	var xAxis = new Plottable.Axes.Time(xScale, "bottom");
+		var yScale = new Plottable.Scales.Category();
+		var yAxis = new Plottable.Axes.Category(yScale, "left");
 
-	var yScale = new Plottable.Scales.Category();
-	var yAxis = new Plottable.Axes.Category(yScale, "left");
+		var plot = new Plottable.Plots.Rectangle()
+		  .x(           function(d) { return d.begin; }, xScale)
+		  .x2(          function(d) { return d.end;   })
+		  .y(           function(d) { return d.name;  }, yScale)
+		  .attr("fill", function(d) { return d.time;  }, colorScale)
+		  .addDataset(new Plottable.Dataset(data));
 
-	var plot = new Plottable.Plots.Rectangle()
-	  .x(           function(d) { return d.begin; }, xScale)
-	  .x2(          function(d) { return d.end;   })
-	  .y(           function(d) { return d.name;  }, yScale)
-	  .attr("fill", function(d) { return d.time;  }, colorScale)
-	  .addDataset(new Plottable.Dataset(data));
+		var chart = new Plottable.Components.Table([
+			[yAxis, plot],
+			[null, xAxis]
+		]);
 
-	var chart = new Plottable.Components.Table([
-		[yAxis, plot],
-		[null, xAxis]
-	]);
-
-	chart.renderTo("#recordtimeline");
+		chart.renderTo("#recordtimeline");
 /*
-	var chart = new google.visualization.Timeline(document.getElementById('recordtimeline'));
-	chart.draw(timelineDataTable, {timeline: {rowLabelStyle: {fontSize: 9}}});
+		var chart = new google.visualization.Timeline(document.getElementById('recordtimeline'));
+		chart.draw(timelineDataTable, {timeline: {rowLabelStyle: {fontSize: 9}}});
 
-	var yTicks = [];
-	for(var i = 0; i < 12; ++i) {
-		yTicks[i] = {v:i * 300, f:i * 5 + ':00'};
-	}
-	for(var i = 12; i < 14; ++i) {
-		yTicks[i] = {v:i * 300, f:'1:0' + ((i - 12) * 5) + ':00'};
-	}
-	for(var i = 14; i < 16; ++i) {
-		yTicks[i] = {v:i * 300, f:'1:' + ((i - 12) * 5) + ':00'};
-	}
+		var yTicks = [];
+		for(var i = 0; i < 12; ++i) {
+			yTicks[i] = {v:i * 300, f:i * 5 + ':00'};
+		}
+		for(var i = 12; i < 14; ++i) {
+			yTicks[i] = {v:i * 300, f:'1:0' + ((i - 12) * 5) + ':00'};
+		}
+		for(var i = 14; i < 16; ++i) {
+			yTicks[i] = {v:i * 300, f:'1:' + ((i - 12) * 5) + ':00'};
+		}
 
 
-	var linechart = new google.visualization.LineChart(document.getElementById('linechart'));
-	linechart.draw(lineDataTable, {'chartArea': {'left': 130, 'top': 25, 'width': '100%', 'height': 450}, 'legend': {'position':'none'}, 'vAxis': {'minValue': 0, 'viewWindow': {'min': 0}, 'ticks': yTicks}});
+		var linechart = new google.visualization.LineChart(document.getElementById('linechart'));
+		linechart.draw(lineDataTable, {'chartArea': {'left': 130, 'top': 25, 'width': '100%', 'height': 450}, 'legend': {'position':'none'}, 'vAxis': {'minValue': 0, 'viewWindow': {'min': 0}, 'ticks': yTicks}});
 */
-}
-jQuery(document).ready(function() { drawChart(); });
+	}
+
+	jQuery(document).ready(function() { drawChart(); });
 </script>
 
 <svg id="recordtimeline" style="width: 100%; height: 350px;"></svg>
