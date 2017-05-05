@@ -17,8 +17,8 @@
 		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '65:00', begin: new Date(2008, 3, 2), end: new Date(2009, 4, 31) },
 		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '59:41', begin: new Date(2009, 5, 1), end: new Date(2011, 0, 1) },
 		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '57:43', begin: new Date(2011, 0, 1), end: new Date(2012, 8, 25) },
-		{ name: 'Jeff Feasel', time: '34:21', begin: new Date(2012, 8, 25), begin: new Date(2012, 9, 1) },
-		{ name: 'Jeff Feasel', time: '28:35', begin: new Date(2012, 9, 1), begin: new Date(2013, 1, 8) },
+		{ name: 'Jeff Feasel', time: '34:21', begin: new Date(2012, 8, 25), end: new Date(2012, 9, 1) },
+		{ name: 'Jeff Feasel', time: '28:35', begin: new Date(2012, 9, 1), end: new Date(2013, 1, 8) },
 		{ name: 'Neil "PresJPolk" Stevens', time: '28:14', begin: new Date(2013, 1, 8), end: new Date(2013, 1, 9) },
 		{ name: 'John "Pro_JN" Nurminen', time: '27:04', begin: new Date(2013, 1, 9), end: new Date(2013, 1, 10) },
 		{ name: 'Neil "PresJPolk" Stevens', time: '26:30', begin: new Date(2013, 1, 10), end: new Date(2013, 1, 11) },
@@ -41,29 +41,30 @@
 		{ name: 'Ian "Opus" Napierkowski', time: '18:12', begin: new Date(2017, 1, 4), end: new Date(2017, 1, 4) },
 		{ name: 'Ian "Opus" Napierkowski', time: '18:07', begin: new Date(2017, 1, 18), end: new Date() }
 	];
+
 function drawChart() {
 
-var colorScale = new Plottable.Scales.Color();
+	var colorScale = new Plottable.Scales.Color();
 
-var xScale = new Plottable.Scales.Time();
-var xAxis = new Plottable.Axes.Time(xScale, "bottom");
+	var xScale = new Plottable.Scales.Time();
+	var xAxis = new Plottable.Axes.Time(xScale, "bottom");
 
-var yScale = new Plottable.Scales.Category();
-var yAxis = new Plottable.Axes.Category(yScale, "left");
+	var yScale = new Plottable.Scales.Category();
+	var yAxis = new Plottable.Axes.Category(yScale, "left");
 
-var plot = new Plottable.Plots.Rectangle()
-  .x(function(d) { return d.begin; }, xScale)
-  .x2(function(d) { return d.end; })
-  .y(function(d) { return d.name; }, yScale)
-  .attr("fill", function(d) { return d.time; }, colorScale)
-  .addDataset(new Plottable.Dataset(data));
+	var plot = new Plottable.Plots.Rectangle()
+	  .x(           function(d) { return d.begin; }, xScale)
+	  .x2(          function(d) { return d.end;   })
+	  .y(           function(d) { return d.name;  }, yScale)
+	  .attr("fill", function(d) { return d.time;  }, colorScale)
+	  .addDataset(new Plottable.Dataset(data));
 
-var chart = new Plottable.Components.Table([
-  [yAxis, plot],
-  [null, xAxis]
-]);
+	var chart = new Plottable.Components.Table([
+		[yAxis, plot],
+		[null, xAxis]
+	]);
 
-chart.renderTo("#recordtimeline");
+	chart.renderTo("#recordtimeline");
 /*
 	var chart = new google.visualization.Timeline(document.getElementById('recordtimeline'));
 	chart.draw(timelineDataTable, {timeline: {rowLabelStyle: {fontSize: 9}}});
