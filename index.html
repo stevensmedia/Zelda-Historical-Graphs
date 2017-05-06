@@ -92,7 +92,30 @@
 		  .interpolator("step-after")
 		  .addDataset(new Plottable.Dataset(data));
 
-		var plotGroup = new Plottable.Components.Group([plotPlayer, plotTime]);
+		function clearHighlight() {
+			plotPlayer.entities().forEach(function(entity) {
+				jQuery(entity.selection[0][0]).attr('stroke', 'rgba(0, 0, 0, 0)');
+			});
+		}
+
+		function generateHighlighter() {
+			var highlight = new Plottable.Interactions.Pointer();
+			highlight.onPointerMove(function(point) {
+				var entities = plotPlayer.entitiesIn({min: point.x, max: point.x}, {min: -9999999, max: 9999999});
+				clearHighlight();
+				if(entities.length) {
+					jQuery(entities[0].selection[0][0]).attr('stroke', 'rgba(0, 0, 0, 1.0)');
+					jQuery(entities[0].selection[0][0]).attr('stroke-width', '2px');
+				}
+			});
+			highlight.onPointerExit(function() {
+				clearHighlight();
+			});
+			return highlight;
+		}
+
+		generateHighlighter().attachTo(plotTime);
+		generateHighlighter().attachTo(plotPlayer);
 
 		var chart = new Plottable.Components.Table([
 			[null,        xAxisTop   ],
