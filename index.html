@@ -4,9 +4,12 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript" src="https://raw.githubusercontent.com/palantir/plottable/master/plottable.min.js"></script>
-</head>
-<body>
-
+<style type="text/css">
+	body svg#recordtimeline.plottable {
+		width: 100%;
+		height: 800px;
+	}
+</style>
 <script type="text/javascript">
 	var todayJS = new Date();
 
@@ -85,14 +88,17 @@
 			[yAxisTime,   plotTime   ],
 			[null,        xAxisBottom]
 		]);
+		chart.rowWeight(1, 1);
+		chart.rowWeight(2, 2);
 
 		chart.renderTo("#recordtimeline");
 	}
 
 	jQuery(document).ready(function() { drawCharts(); });
 </script>
-
-<svg id="recordtimeline" style="width: 100%; height: 350px;"></svg>
+</head>
+<body>
+<svg id="recordtimeline"></svg>
 <p>Important note<p>
 <p>The reason the time dropped like a rock from Arctic_Eagle's time wasn't that his runs were bad.  In fact they were very good.  It's that Solairflaire found the Thunderbird skip, and that completely changed the possible routing.  In addition, the glitched hammer and Palace 7 were routed in.</p>
 </body>
