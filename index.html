@@ -52,7 +52,8 @@
 		var colorScale = new Plottable.Scales.Color();
 
 		var xScale = new Plottable.Scales.Time();
-		var xAxis = new Plottable.Axes.Time(xScale, "bottom");
+		var xAxisTop = new Plottable.Axes.Time(xScale, "top");
+		var xAxisBottom = new Plottable.Axes.Time(xScale, "bottom");
 
 		var yScalePlayer = new Plottable.Scales.Category();
 		var yAxisPlayer = new Plottable.Axes.Category(yScalePlayer, "left");
@@ -68,7 +69,7 @@
 		var xAxis = new Plottable.Axes.Time(xScale, "bottom");
 
 		var yScaleTime = new Plottable.Scales.Linear();
-		var yAxisTime = new Plottable.Axes.Numeric(yScaleTime, "right");
+		var yAxisTime = new Plottable.Axes.Numeric(yScaleTime, "left");
 
 		var plotTime = new Plottable.Plots.Line()
 		  .x(           function(d) { return d.begin;              }, xScale)
@@ -79,8 +80,10 @@
 		var plotGroup = new Plottable.Components.Group([plotPlayer, plotTime]);
 
 		var chart = new Plottable.Components.Table([
-			[yAxisPlayer, plotGroup, yAxisTime],
-			[null,        xAxis,     null]
+			[null,        xAxisTop   ],
+			[yAxisPlayer, plotPlayer ],
+			[yAxisTime,   plotTime   ],
+			[null,        xAxisBottom]
 		]);
 
 		chart.renderTo("#recordtimeline");
