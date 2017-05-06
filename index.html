@@ -5,7 +5,7 @@
 <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript" src="https://raw.githubusercontent.com/palantir/plottable/master/plottable.min.js"></script>
 <style type="text/css">
-	body svg#recordtimeline.plottable {
+	body svg#z2timeline.plottable {
 		width: 100%;
 		height: 800px;
 	}
@@ -13,7 +13,7 @@
 <script type="text/javascript">
 	var todayJS = new Date();
 
-	var data = [
+	var z2Data = [
 		{ name: 'Scott "sdkess" Kessler',             time: '72:10', begin: new Date(2004, 7, 24),  end: new Date(2006, 11, 26) },
 		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '70:26', begin: new Date(2006, 11, 26), end: new Date(2007, 1, 14) },
 		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '66:17', begin: new Date(2007, 1, 14),  end: new Date(2008, 3, 2) },
@@ -51,7 +51,7 @@
 		return secs;
 	}
 
-	function drawCharts() {
+	function drawZ2Charts() {
 		var colorScale = new Plottable.Scales.Color();
 
 		var xScale = new Plottable.Scales.Time();
@@ -66,7 +66,7 @@
 		  .x2(          function(d) { return d.end;   })
 		  .y(           function(d) { return d.name;  }, yScalePlayer)
 		  .attr("fill", function(d) { return d.time;  }, colorScale)
-		  .addDataset(new Plottable.Dataset(data));
+		  .addDataset(new Plottable.Dataset(z2Data));
 
 		var xScale = new Plottable.Scales.Time();
 		var xAxis = new Plottable.Axes.Time(xScale, "bottom");
@@ -78,7 +78,7 @@
 		  .x(           function(d) { return d.begin;              }, xScale)
 		  .y(           function(d) { return convertTime(d.time);  }, yScaleTime)
 		  .attr("fill", function(d) { return d.name;               }, colorScale)
-		  .addDataset(new Plottable.Dataset(data));
+		  .addDataset(new Plottable.Dataset(z2Data));
 
 		var plotGroup = new Plottable.Components.Group([plotPlayer, plotTime]);
 
@@ -91,14 +91,14 @@
 		chart.rowWeight(1, 1);
 		chart.rowWeight(2, 2);
 
-		chart.renderTo("#recordtimeline");
+		chart.renderTo("#z2timeline");
 	}
 
-	jQuery(document).ready(function() { drawCharts(); });
+	jQuery(document).ready(function() { drawZ2Charts(); });
 </script>
 </head>
 <body>
-<svg id="recordtimeline"></svg>
+<svg id="z2timeline"></svg>
 <p>Important note<p>
 <p>The reason the time dropped like a rock from Arctic_Eagle's time wasn't that his runs were bad.  In fact they were very good.  It's that Solairflaire found the Thunderbird skip, and that completely changed the possible routing.  In addition, the glitched hammer and Palace 7 were routed in.</p>
 </body>
