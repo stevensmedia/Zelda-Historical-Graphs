@@ -61,8 +61,8 @@
 		return secs;
 	}
 
-	function drawZ2Charts() {
-		var playerNames = getPlayerNames(z2Data);
+	function drawChart(data, selector) {
+		var playerNames = getPlayerNames(data);
 		var colorScale = new Plottable.Scales.Color();
 
 		var xScale = new Plottable.Scales.Time();
@@ -77,7 +77,7 @@
 		  .x2(          function(d) { return d.end;   })
 		  .y(           function(d) { return d.name;  }, yScalePlayer)
 		  .attr("fill", function(d) { return playerNames.indexOf(d.name);  }, colorScale)
-		  .addDataset(new Plottable.Dataset(z2Data));
+		  .addDataset(new Plottable.Dataset(data));
 
 		var xScale = new Plottable.Scales.Time();
 		var xAxis = new Plottable.Axes.Time(xScale, "bottom");
@@ -90,7 +90,7 @@
 		  .y(           function(d) { return convertTime(d.time);  }, yScaleTime)
 		  .attr("stroke", function(d) { return "#000000"; } )
 		  .interpolator("step-after")
-		  .addDataset(new Plottable.Dataset(z2Data));
+		  .addDataset(new Plottable.Dataset(data));
 
 		var plotGroup = new Plottable.Components.Group([plotPlayer, plotTime]);
 
@@ -103,10 +103,10 @@
 		chart.rowWeight(1, 1);
 		chart.rowWeight(2, 2);
 
-		chart.renderTo("#z2timeline");
+		chart.renderTo(selector);
 	}
 
-	jQuery(document).ready(function() { drawZ2Charts(); });
+	jQuery(document).ready(function() { drawChart(z2Data, "#z2timeline"); });
 </script>
 </head>
 <body>
