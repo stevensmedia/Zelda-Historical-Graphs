@@ -120,8 +120,12 @@
 
 	function convertTime(s) {
 		var c = s.split(':');
-		var secs = 0 + c[0] + c[1];
+		var secs = c[0] * 60 + c[1] * 1;
 		return secs;
+	}
+
+	function printSecs(secs) {
+		return Math.floor(secs / 60) + ":" + secs % 60;
 	}
 
 	function drawChart(data, selector) {
@@ -147,6 +151,7 @@
 
 		var yScaleTime = new Plottable.Scales.Linear();
 		var yAxisTime = new Plottable.Axes.Numeric(yScaleTime, "left");
+		yAxisTime.formatter(printSecs);
 
 		var plotTime = new Plottable.Plots.Line()
 		  .x(           function(d) { return d.begin;              }, xScale)
