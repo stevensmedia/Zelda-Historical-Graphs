@@ -1,0 +1,15 @@
+.plotpopup {
+	position: absolute;
+	width: 300px;
+	height: 48px;
+	margin-left: -200px;
+	margin-top: 25px;
+	display: none;
+
+	text-align: center;
+	font-family: Joystix, Mono;
+	font-size: 10px;
+	border: solid 1px #777777;
+	background: rgba(100,100,100, .5);
+	color: #ffffff;
+}

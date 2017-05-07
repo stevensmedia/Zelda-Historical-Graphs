@@ -108,6 +108,7 @@ function zeldaHistoryChart(rawData, chartSelector, popupSelector) {
 	var popupInterval;
 	var popupLast;
 	var popup = jQuery(popupSelector);
+	popup.addClass('zhpopup');
 
 	generateHighlighter(plotTime);
 	generateHighlighter(plotPlayer);
