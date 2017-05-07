@@ -102,7 +102,7 @@
 	function setEnds(ary) {
 		ary[ary.length - 1]['end'] = new Date();
 		for(var i = ary.length - 2; i >= 0; --i) {
-			lozData[i]['end'] = lozData[i + 1].begin
+			ary[i]['end'] = ary[i + 1].begin
 		}
 	}
 	setEnds(lozData);
