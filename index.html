@@ -29,40 +29,88 @@
 	var todayJS = new Date();
 
 	var z2Data = [
-		{ name: 'Scott "sdkess" Kessler',             time: '72:10', begin: new Date(2004, 7, 25),  end: new Date(2006, 11, 27) },
-		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '70:26', begin: new Date(2006, 11, 27), end: new Date(2007, 1, 15) },
-		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '66:17', begin: new Date(2007, 1, 15),  end: new Date(2008, 3, 3) },
-		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '65:00', begin: new Date(2008, 3, 3),   end: new Date(2009, 5, 2) },
-		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '59:41', begin: new Date(2009, 5, 2),   end: new Date(2011, 0, 2) },
-		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '57:43', begin: new Date(2011, 0, 2),   end: new Date(2012, 8, 26) },
-		{ name: 'Jeff Feasel',                        time: '34:21', begin: new Date(2012, 8, 26),  end: new Date(2012, 9, 2) },
-		{ name: 'Jeff Feasel',                        time: '28:35', begin: new Date(2012, 9, 2),   end: new Date(2013, 1, 9) },
-		{ name: 'Neil "PresJPolk" Stevens',           time: '28:14', begin: new Date(2013, 1, 9),   end: new Date(2013, 1, 10) },
-		{ name: 'John "Pro_JN" Nurminen',             time: '27:04', begin: new Date(2013, 1, 10),   end: new Date(2013, 1, 11) },
-		{ name: 'Neil "PresJPolk" Stevens',           time: '26:30', begin: new Date(2013, 1, 11),  end: new Date(2013, 1, 12) },
-		{ name: 'John "Pro_JN" Nurminen',             time: '22:33', begin: new Date(2013, 1, 12),  end: new Date(2013, 4, 12) },
-		{ name: 'Neil "PresJPolk" Stevens',           time: '21:51', begin: new Date(2013, 4, 12),  end: new Date(2013, 4, 15) },
-		{ name: 'John "Pro_JN" Nurminen',             time: '20:42', begin: new Date(2013, 4, 15),  end: new Date(2013, 5, 19) },
-		{ name: 'John "Pro_JN" Nurminen',             time: '19:53', begin: new Date(2013, 5, 19),  end: new Date(2013, 5, 21) },
-		{ name: 'Lloyd "Simpoldood" M.',              time: '19:47', begin: new Date(2013, 5, 21),  end: new Date(2013, 5, 23) },
-		{ name: 'Lloyd "Simpoldood" M.',              time: '19:26', begin: new Date(2013, 5, 23),  end: new Date(2013, 9, 17) },
-		{ name: 'Lloyd "Simpoldood" M.',              time: '19:21', begin: new Date(2013, 9, 17),  end: new Date(2013, 9, 20) },
-		{ name: 'Lloyd "Simpoldood" M.',              time: '19:15', begin: new Date(2013, 9, 20),  end: new Date(2014, 3, 15) },
-		{ name: 'Lloyd "Simpoldood" M.',              time: '19:05', begin: new Date(2014, 3, 15),  end: new Date(2014, 5, 19) },
-		{ name: 'John "Pro_JN" Nurminen',             time: '18:53', begin: new Date(2014, 5, 19),  end: new Date(2015, 9, 1) },
-		{ name: 'Ian "Opus" Napierkowski',            time: '18:35', begin: new Date(2015, 9, 1),   end: new Date(2016, 3, 22) },
-		{ name: 'Ian "Opus" Napierkowski',            time: '18:31', begin: new Date(2016, 3, 22),  end: new Date(2017, 1, 1) },
-		{ name: 'Lloyd "Simpoldood" M.',              time: '18:29', begin: new Date(2017, 1, 1),   end: new Date(2017, 1, 1) },
-		{ name: 'Ian "Opus" Napierkowski',            time: '18:25', begin: new Date(2017, 1, 1),   end: new Date(2017, 1, 5) },
-		{ name: 'Lloyd "Simpoldood" M.',              time: '18:23', begin: new Date(2017, 1, 5),   end: new Date(2017, 1, 5) },
-		{ name: 'Ian "Opus" Napierkowski',            time: '18:18', begin: new Date(2017, 1, 5),   end: new Date(2017, 1, 5) },
-		{ name: 'Ian "Opus" Napierkowski',            time: '18:12', begin: new Date(2017, 1, 5),   end: new Date(2017, 1, 19) },
-		{ name: 'Ian "Opus" Napierkowski',            time: '18:07', begin: new Date(2017, 1, 19),  end: new Date() }
+		{ name: 'Scott "sdkess" Kessler',             time: '72:10', begin: new Date(2004, 7, 25) },
+		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '70:26', begin: new Date(2006, 11, 27) },
+		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '66:17', begin: new Date(2007, 1, 15) },
+		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '65:00', begin: new Date(2008, 3, 3) },
+		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '59:41', begin: new Date(2009, 5, 2) },
+		{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '57:43', begin: new Date(2011, 0, 2) },
+		{ name: 'Jeff Feasel',                        time: '34:21', begin: new Date(2012, 8, 26) },
+		{ name: 'Jeff Feasel',                        time: '28:35', begin: new Date(2012, 9, 2) },
+		{ name: 'Neil "PresJPolk" Stevens',           time: '28:14', begin: new Date(2013, 1, 9) },
+		{ name: 'John "Pro_JN" Nurminen',             time: '27:04', begin: new Date(2013, 1, 10) },
+		{ name: 'Neil "PresJPolk" Stevens',           time: '26:30', begin: new Date(2013, 1, 11) },
+		{ name: 'John "Pro_JN" Nurminen',             time: '22:33', begin: new Date(2013, 1, 12) },
+		{ name: 'Neil "PresJPolk" Stevens',           time: '21:51', begin: new Date(2013, 4, 12) },
+		{ name: 'John "Pro_JN" Nurminen',             time: '20:42', begin: new Date(2013, 4, 15) },
+		{ name: 'John "Pro_JN" Nurminen',             time: '19:53', begin: new Date(2013, 5, 19) },
+		{ name: 'Lloyd "Simpoldood" M.',              time: '19:47', begin: new Date(2013, 5, 21) },
+		{ name: 'Lloyd "Simpoldood" M.',              time: '19:26', begin: new Date(2013, 5, 23) },
+		{ name: 'Lloyd "Simpoldood" M.',              time: '19:21', begin: new Date(2013, 9, 17) },
+		{ name: 'Lloyd "Simpoldood" M.',              time: '19:15', begin: new Date(2013, 9, 20) },
+		{ name: 'Lloyd "Simpoldood" M.',              time: '19:05', begin: new Date(2014, 3, 15) },
+		{ name: 'John "Pro_JN" Nurminen',             time: '18:53', begin: new Date(2014, 5, 19) },
+		{ name: 'Ian "Opus" Napierkowski',            time: '18:35', begin: new Date(2015, 9, 1) },
+		{ name: 'Ian "Opus" Napierkowski',            time: '18:31', begin: new Date(2016, 3, 22) },
+		{ name: 'Lloyd "Simpoldood" M.',              time: '18:29', begin: new Date(2017, 1, 1) },
+		{ name: 'Ian "Opus" Napierkowski',            time: '18:25', begin: new Date(2017, 1, 1) },
+		{ name: 'Lloyd "Simpoldood" M.',              time: '18:23', begin: new Date(2017, 1, 5) },
+		{ name: 'Ian "Opus" Napierkowski',            time: '18:18', begin: new Date(2017, 1, 5) },
+		{ name: 'Ian "Opus" Napierkowski',            time: '18:12', begin: new Date(2017, 1, 5) },
+		{ name: 'Ian "Opus" Napierkowski',            time: '18:07', begin: new Date(2017, 1, 19) },
 	];
+
+	var lozData = [
+		{begin: new Date(2003, 7, 01), name: 'Rdrunner', time: '34:04'},
+		{begin: new Date(2012, 4, 30), name: 'hal_yotsuba (はる＠よつば)', time: '33:14'},
+		{begin: new Date(2012, 6, 5), name: 'Darkwing Duck', time: '32:52'},
+		{begin: new Date(2012, 6, 16), name: 'Darkwing Duck', time: '32:46'},
+		{begin: new Date(2012, 6, 26), name: 'Darkwing Duck', time: '32:45'},
+		{begin: new Date(2012, 7, 1), name: 'Darkwing Duck', time: '32:31'},
+		{begin: new Date(2012, 7, 5), name: 'Darkwing Duck', time: '32:20'},
+		{begin: new Date(2012, 7, 11), name: 'Darkwing Duck', time: '32:04'},
+		{begin: new Date(2013, 2, 3), name: 'hal_yotsuba (はる＠よつば)', time: '31:35'},
+		{begin: new Date(2013, 8, 24), name: 'Darkwing Duck', time: '31:25'},
+		{begin: new Date(2014, 5, 20), name: 'Darkwing Duck', time: '31:07'},
+		{begin: new Date(2014, 7, 9), name: 'LackAttack24', time: '31:02'},
+		{begin: new Date(2014, 8, 30), name: 'Darkwing Duck', time: '30:37'},
+		{begin: new Date(2015, 1, 23), name: 'Darkwing Duck', time: '30:29'},
+		{begin: new Date(2015, 2, 7), name: 'LackAttack24', time: '30:25'},
+		{begin: new Date(2015, 2, 10), name: 'Darkwing Duck', time: '30:16'},
+		{begin: new Date(2015, 2, 27), name: 'LackAttack24', time: '30:06'},
+		{begin: new Date(2015, 3, 31), name: 'LackAttack24', time: '29:56'},
+		{begin: new Date(2015, 8, 21), name: 'LackAttack24', time: '29:50'},
+		{begin: new Date(2015, 9, 15), name: 'LackAttack24', time: '29:48'},
+		{begin: new Date(2015, 9, 21), name: 'LackAttack24', time: '29:36'},
+		{begin: new Date(2015, 9, 29), name: 'LackAttack24', time: '29:33'},
+		{begin: new Date(2015, 10, 19), name: 'LackAttack24', time: '29:24'},
+		{begin: new Date(2015, 10, 30), name: 'LackAttack24', time: '29:19'},
+		{begin: new Date(2015, 11, 19), name: 'LackAttack24', time: '29:13'},
+		{begin: new Date(2015, 11, 21), name: 'LackAttack24', time: '29:11'},
+		{begin: new Date(2015, 12, 2), name: 'LackAttack24', time: '29:04'},
+		{begin: new Date(2015, 12, 9), name: 'LackAttack24', time: '28:50'},
+		{begin: new Date(2016, 6, 26), name: 'Eunos', time: '28:42'},
+		{begin: new Date(2016, 10, 26), name: 'Eunos', time: '28:40'},
+		{begin: new Date(2016, 11, 2), name: 'Eunos', time: '28:35'},
+		{begin: new Date(2017, 2, 13), name: 'LackAttack24', time: '28:19'},
+		{begin: new Date(2017, 2, 21), name: 'Eunos', time: '28:12'},
+		{begin: new Date(2017, 3, 3), name: 'Eunos', time: '28:08'},
+		{begin: new Date(2017, 3, 8), name: 'Eunos', time: '28:03'},
+		{begin: new Date(2017, 4, 8), name: 'Eunos', time: '28:02'},
+	];
+
+	function setEnds(ary) {
+		ary[ary.length - 1]['end'] = new Date();
+		for(var i = ary.length - 2; i >= 0; --i) {
+			lozData[i]['end'] = lozData[i + 1].begin
+		}
+	}
+	setEnds(lozData);
+	setEnds(z2Data);
 
 	function getPlayerNames(data) {
 		var ret = [];
-		z2Data.forEach(function(row) {
+		data.forEach(function(row) {
 			if(-1 == ret.indexOf(row.name)) {
 				ret.push(row.name);
 			}
@@ -180,6 +228,7 @@
 	}
 
 	jQuery(document).ready(function() {
+		drawChart(lozData, "#loztimeline");
 		drawChart(z2Data, "#z2timeline");
 		setMouseEvent();
 	});
@@ -188,6 +237,7 @@
 </script>
 </head>
 <body>
+<svg class="timeline" id="loztimeline"></svg>
 <svg class="timeline" id="z2timeline"></svg>
 <div class="plotpopup");
 <p>Important note<p>
