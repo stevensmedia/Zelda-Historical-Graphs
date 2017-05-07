@@ -129,7 +129,7 @@
 
 					var html = "Runner: " + entity.datum.name + "<br/>" +
 					           "Time: " + entity.datum.time + "<br/>" +
-					           "Date: " + entity.datum.begin;
+					           "Date: " + entity.datum.begin.toLocaleDateString();
 					popup.css("left", getMouse().x)
 					     .css("top", getMouse().y)
 					     .css("display", 'block')
