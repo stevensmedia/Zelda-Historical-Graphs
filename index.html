@@ -5,9 +5,24 @@
 <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript" src="https://raw.githubusercontent.com/palantir/plottable/master/plottable.min.js"></script>
 <style type="text/css">
-	body svg#z2timeline.plottable {
+	.timeline {
 		width: 100%;
 		height: 800px;
+	}
+
+	.plotpopup {
+		position: absolute;
+		width: 300px;
+		height: 48px;
+		margin-left: -200px;
+		margin-top: 25px;
+		font-family: Joystix, Mono;
+		font-size: 10px;
+		display: none;
+		border: solid 1px #777777;
+		background: rgba(100,100,100, .5);
+		color: #ffffff;
+		text-align: center;
 	}
 </style>
 <script type="text/javascript">
@@ -92,30 +107,53 @@
 		  .interpolator("step-after")
 		  .addDataset(new Plottable.Dataset(data));
 
+		var popupInterval;
+		var popupLast;
+		var popup = jQuery('.plotpopup');
 		function clearHighlight() {
 			plotPlayer.entities().forEach(function(entity) {
 				jQuery(entity.selection[0][0]).attr('stroke', 'rgba(0, 0, 0, 0)');
 			});
 		}
-
-		function generateHighlighter() {
+		function generateHighlighter(plot) {
 			var highlight = new Plottable.Interactions.Pointer();
 			highlight.onPointerMove(function(point) {
 				var entities = plotPlayer.entitiesIn({min: point.x, max: point.x}, {min: -9999999, max: 9999999});
 				clearHighlight();
-				if(entities.length) {
-					jQuery(entities[0].selection[0][0]).attr('stroke', 'rgba(0, 0, 0, 1.0)');
-					jQuery(entities[0].selection[0][0]).attr('stroke-width', '2px');
+				if(entities.length && popupLast != entities[0]) {
+					var entity = entities[0];
+					popupLast = entity;
+					var rect = jQuery(entities[0].selection[0][0]);
+					rect.attr('stroke', 'rgba(0, 0, 0, 1.0)')
+					    .attr('stroke-width', '2px');
+
+					var html = "Runner: " + entity.datum.name + "<br/>" +
+					           "Time: " + entity.datum.time + "<br/>" +
+					           "Date: " + entity.datum.begin;
+					popup.css("left", getMouse().x)
+					     .css("top", getMouse().y)
+					     .css("display", 'block')
+					     .html(html);
+
+					jQuery('body').append(popup);
+
+					if(popupInterval) {
+						clearInterval(popupInterval);
+						popupInterval = null;
+					}
 				}
 			});
 			highlight.onPointerExit(function() {
-				clearHighlight();
+				popupInterval = setInterval(function() {
+					popup.css('display', 'none');
+					clearHighlight();
+				}, 500);
 			});
-			return highlight;
+			highlight.attachTo(plot);
 		}
 
-		generateHighlighter().attachTo(plotTime);
-		generateHighlighter().attachTo(plotPlayer);
+		generateHighlighter(plotTime);
+		generateHighlighter(plotPlayer);
 
 		var chart = new Plottable.Components.Table([
 			[null,        xAxisTop   ],
@@ -129,11 +167,29 @@
 		chart.renderTo(selector);
 	}
 
-	jQuery(document).ready(function() { drawChart(z2Data, "#z2timeline"); });
+	var getMouse;
+	function setMouseEvent() {
+		var currentMousePos = { x: -1, y: -1 };
+		$(document).mousemove(function(event) {
+			currentMousePos.x = event.pageX;
+			currentMousePos.y = event.pageY;
+		});
+		getMouse = function() {
+			return currentMousePos;
+		}
+	}
+
+	jQuery(document).ready(function() {
+		drawChart(z2Data, "#z2timeline");
+		setMouseEvent();
+	});
+
+
 </script>
 </head>
 <body>
-<svg id="z2timeline"></svg>
+<svg class="timeline" id="z2timeline"></svg>
+<div class="plotpopup");
 <p>Important note<p>
 <p>The reason the time dropped like a rock from Arctic_Eagle's time wasn't that his runs were bad.  In fact they were very good.  It's that Solairflaire found the Thunderbird skip, and that completely changed the possible routing.  In addition, the glitched hammer and Palace 7 were routed in.</p>
 </body>
