@@ -1,0 +1,35 @@
+var z2Data = [
+	{ name: 'Scott "sdkess" Kessler',             time: '72:10', begin: new Date(2004, 7, 25) },
+	{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '70:26', begin: new Date(2006, 11, 27) },
+	{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '66:17', begin: new Date(2007, 1, 15) },
+	{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '65:00', begin: new Date(2008, 3, 3) },
+	{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '59:41', begin: new Date(2009, 5, 2) },
+	{ name: 'Kristian "Arctic_Eagle" Emanuelsen', time: '57:43', begin: new Date(2011, 0, 2) },
+	{ name: 'Jeff Feasel',                        time: '34:21', begin: new Date(2012, 8, 26) },
+	{ name: 'Jeff Feasel',                        time: '28:35', begin: new Date(2012, 9, 2) },
+	{ name: 'Neil "PresJPolk" Stevens',           time: '28:14', begin: new Date(2013, 1, 9) },
+	{ name: 'John "Pro_JN" Nurminen',             time: '27:04', begin: new Date(2013, 1, 10) },
+	{ name: 'Neil "PresJPolk" Stevens',           time: '26:30', begin: new Date(2013, 1, 11) },
+	{ name: 'John "Pro_JN" Nurminen',             time: '22:33', begin: new Date(2013, 1, 12) },
+	{ name: 'Neil "PresJPolk" Stevens',           time: '21:51', begin: new Date(2013, 4, 12) },
+	{ name: 'John "Pro_JN" Nurminen',             time: '20:42', begin: new Date(2013, 4, 15) },
+	{ name: 'John "Pro_JN" Nurminen',             time: '19:53', begin: new Date(2013, 5, 19) },
+	{ name: 'Lloyd "Simpoldood" M.',              time: '19:47', begin: new Date(2013, 5, 21) },
+	{ name: 'Lloyd "Simpoldood" M.',              time: '19:26', begin: new Date(2013, 5, 23) },
+	{ name: 'Lloyd "Simpoldood" M.',              time: '19:21', begin: new Date(2013, 9, 17) },
+	{ name: 'Lloyd "Simpoldood" M.',              time: '19:15', begin: new Date(2013, 9, 20) },
+	{ name: 'Lloyd "Simpoldood" M.',              time: '19:05', begin: new Date(2014, 3, 15) },
+	{ name: 'John "Pro_JN" Nurminen',             time: '18:53', begin: new Date(2014, 5, 19) },
+	{ name: 'Ian "Opus" Napierkowski',            time: '18:35', begin: new Date(2015, 9, 1) },
+	{ name: 'Ian "Opus" Napierkowski',            time: '18:31', begin: new Date(2016, 3, 22) },
+	{ name: 'Lloyd "Simpoldood" M.',              time: '18:29', begin: new Date(2017, 1, 1) },
+	{ name: 'Ian "Opus" Napierkowski',            time: '18:25', begin: new Date(2017, 1, 1) },
+	{ name: 'Lloyd "Simpoldood" M.',              time: '18:23', begin: new Date(2017, 1, 5) },
+	{ name: 'Ian "Opus" Napierkowski',            time: '18:18', begin: new Date(2017, 1, 5) },
+	{ name: 'Ian "Opus" Napierkowski',            time: '18:12', begin: new Date(2017, 1, 5) },
+	{ name: 'Ian "Opus" Napierkowski',            time: '18:07', begin: new Date(2017, 1, 19) },
+];
+
+jQuery(document).ready(function() {
+	zeldaHistoryChart(z2Data, '#z2timeline', '#z2popup');
+});
