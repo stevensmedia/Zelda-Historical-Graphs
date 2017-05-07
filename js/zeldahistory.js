@@ -25,7 +25,10 @@ function zeldaHistoryChart(rawData, chartSelector, popupSelector) {
 	}
 
 	function printSecs(secs) {
-		return Math.floor(secs / 60) + ":" + secs % 60;
+		var min = Math.floor(secs / 60)
+		var sec = secs % 60;
+
+		return min + ":" + (sec < 10 ? "0" + sec : sec);
 	}
 
 	function clearHighlight() {
