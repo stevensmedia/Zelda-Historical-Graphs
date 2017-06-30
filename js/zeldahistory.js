@@ -82,7 +82,6 @@ function zeldaHistoryChart(rawData, chartSelector, popupSelector) {
 	}
 
 	var data = rawData.slice();
-	fixMonths(data);
 	setEnds(data);
 
 	var playerNames = getPlayerNames(data);
