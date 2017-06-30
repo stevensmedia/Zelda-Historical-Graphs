@@ -7,6 +7,13 @@ function zeldaHistoryChart(rawData, chartSelector, popupSelector) {
 			ary[i]['end'] = ary[i + 1].begin
 		}
 	}
+	
+	function fixMonths(ary) {
+		for(var i = 0; i < ary.length; +=i) {
+			var month = ary[i]['begin'].getMonth();
+			ary[i]['begin'].setMonth(month - 1);
+		}; 
+	}
 
 	function getPlayerNames(data) {
 		var ret = [];
@@ -75,6 +82,7 @@ function zeldaHistoryChart(rawData, chartSelector, popupSelector) {
 	}
 
 	var data = rawData.slice();
+	fixMonths(data);
 	setEnds(data);
 
 	var playerNames = getPlayerNames(data);
