@@ -9,7 +9,7 @@ function zeldaHistoryChart(rawData, chartSelector, popupSelector) {
 	}
 	
 	function fixMonths(ary) {
-		for(var i = 0; i < ary.length; +=i) {
+		for(var i = 0; i < ary.length; i++) {
 			var month = ary[i]['begin'].getMonth();
 			ary[i]['begin'].setMonth(month - 1);
 		}; 
