@@ -32,7 +32,7 @@ var lozData = [
 	{begin: new Date(2016, 10, 2), name: 'Eunos', time: '28:35'},
 	{begin: new Date(2017, 1, 13), name: 'LackAttack24', time: '28:19'},
 	{begin: new Date(2017, 1, 21), name: 'Eunos', time: '28:12'},
-	{begin: new Date(2017, 2, 3), name: 'Eunos', time: '28:08'},
+	{begin: new Date(2017, 2, 5), name: 'Eunos', time: '28:08'},
 	{begin: new Date(2017, 2, 8), name: 'Eunos', time: '28:03'},
 	{begin: new Date(2017, 3, 8), name: 'Eunos', time: '28:02'},
 	{begin: new Date(2017, 5, 27), name: 'LackAttack24', time: '28:01'},
