@@ -35,6 +35,8 @@ var lozData = [
 	{begin: new Date(2017, 3, 3), name: 'Eunos', time: '28:08'},
 	{begin: new Date(2017, 3, 8), name: 'Eunos', time: '28:03'},
 	{begin: new Date(2017, 4, 8), name: 'Eunos', time: '28:02'},
+	{begin: new Date(2017, 6, 27), name: 'LackAttack24', time: '28:01'},
+	{begin: new Date(2017, 6, 27), name: 'LackAttack24', time: '27:57'}
 ];
 
 jQuery(document).ready(function() {
