@@ -64,11 +64,8 @@ function zeldaHistoryChart(rawData, chartSelector, title, scaleMin) {
 	var maxTime = convertTime(rawData[0].time);
 	var minTime = convertTime(rawData[rawData.length - 1].time);
 	var maxTimeRoundedUp = ((Math.floor(maxTime / 60) / scaleMin) + 1) * scaleMin * 60;
-	console.log('max:' + maxTimeRoundedUp);
 	var minTimeRoundedDown = (Math.floor(minTime / 60) / scaleMin) * scaleMin * 60;
-	console.log('min:' + minTimeRoundedDown);
 	var nticks = Math.floor((maxTimeRoundedUp / 60 / scaleMin) - (minTimeRoundedDown / 60 / scaleMin) + 1);
-	console.log('nticks:' + nticks);
 	var tickVals = [];
 	var tickText = [];
 	for(var i = 0; i < nticks; ++i) {
@@ -98,7 +95,6 @@ function zeldaHistoryChart(rawData, chartSelector, title, scaleMin) {
 		},
 	}
 
-	console.log(layout);
 	Plotly.newPlot(chartSelector, data, layout);
 
 }
