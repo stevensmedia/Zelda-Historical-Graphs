@@ -19,17 +19,18 @@ var z2Data = [
 	{ name: 'Lloyd "Simpoldood" M.',              time: '19:21', begin: new Date(2013, 9, 17) },
 	{ name: 'Lloyd "Simpoldood" M.',              time: '19:15', begin: new Date(2013, 9, 20) },
 	{ name: 'Lloyd "Simpoldood" M.',              time: '19:05', begin: new Date(2014, 3, 15) },
-	{ name: 'John "Pro_JN" Nurminen',             time: '18:53', begin: new Date(2014, 5, 19) },
+	{ name: 'John "Pro_JN" Nurminen',             time: '18:53', begin: new Date(2014, 4, 19) },
 	{ name: 'Ian "Opus" Napierkowski',            time: '18:35', begin: new Date(2015, 9, 1) },
-	{ name: 'Ian "Opus" Napierkowski',            time: '18:31', begin: new Date(2016, 3, 22) },
+	{ name: 'Ian "Opus" Napierkowski',            time: '18:31', begin: new Date(2016, 2, 22) },
 	{ name: 'Lloyd "Simpoldood" M.',              time: '18:29', begin: new Date(2017, 1, 1) },
 	{ name: 'Ian "Opus" Napierkowski',            time: '18:25', begin: new Date(2017, 1, 1) },
-	{ name: 'Lloyd "Simpoldood" M.',              time: '18:23', begin: new Date(2017, 1, 5) },
-	{ name: 'Ian "Opus" Napierkowski',            time: '18:18', begin: new Date(2017, 1, 5) },
-	{ name: 'Ian "Opus" Napierkowski',            time: '18:12', begin: new Date(2017, 1, 5) },
+	{ name: 'Lloyd "Simpoldood" M.',              time: '18:23', begin: new Date(2017, 1, 4) },
+	{ name: 'Ian "Opus" Napierkowski',            time: '18:18', begin: new Date(2017, 1, 4) },
+	{ name: 'Ian "Opus" Napierkowski',            time: '18:12', begin: new Date(2017, 1, 4) },
 	{ name: 'Ian "Opus" Napierkowski',            time: '18:07', begin: new Date(2017, 1, 19) },
+	{ name: 'Lloyd "Simpoldood" M.',              time: '18:02', begin: new Date(2018, 7, 5) },
 ];
 
 jQuery(document).ready(function() {
-	zeldaHistoryChart(z2Data, '#z2timeline', '#z2popup');
+	zeldaHistoryChart(z2Data, 'z2timeline', 'The History of the Zelda II Record');
 });

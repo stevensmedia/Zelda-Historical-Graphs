@@ -1,28 +1,9 @@
-var zhGetMouse;
-
-function zeldaHistoryChart(rawData, chartSelector, popupSelector) {
+function zeldaHistoryChart(rawData, chartSelector, title, scaleMin) {
 	function setEnds(ary) {
 		ary[ary.length - 1]['end'] = new Date();
 		for(var i = ary.length - 2; i >= 0; --i) {
 			ary[i]['end'] = ary[i + 1].begin
 		}
-	}
-	
-	function fixMonths(ary) {
-		for(var i = 0; i < ary.length; i++) {
-			var month = ary[i]['begin'].getMonth();
-			ary[i]['begin'].setMonth(month - 1);
-		}; 
-	}
-
-	function getPlayerNames(data) {
-		var ret = [];
-		data.forEach(function(row) {
-			if(-1 == ret.indexOf(row.name)) {
-				ret.push(row.name);
-			}
-		});
-		return ret;
 	}
 
 	function convertTime(s) {
@@ -31,117 +12,93 @@ function zeldaHistoryChart(rawData, chartSelector, popupSelector) {
 		return secs;
 	}
 
-	function printSecs(secs) {
-		var min = Math.floor(secs / 60)
-		var sec = secs % 60;
-
-		return min + ":" + (sec < 10 ? "0" + sec : sec);
+	function timeText(secs) {
+		var s = secs % 60;
+		var m = ((secs - s) % 3600) / 60;
+		var h = (secs - s - m * 60) / 3600;
+		if(h) {
+			ret = h.toString().padStart(2, '0') + ":" + m.toString().padStart(2, '0') + ":" + s.toString().padStart(2, '0');
+		} else if(m) {
+			ret = m.toString().padStart(2, '0') + ":" + s.toString().padStart(2, '0');
+		} else {
+			ret = "00:" + s.toString().padStart(2, '0');
+		}
+		return ret;
 	}
 
-	function clearHighlight() {
-		plotPlayer.entities().forEach(function(entity) {
-			jQuery(entity.selection[0][0]).attr('stroke', 'rgba(0, 0, 0, 0)');
-		});
+	function getDateSlices(ary) {
+		var ret = {
+			x: [],
+			y: [],
+			text: [],
+			hoverinfo: 'text',
+			type: 'scatter',
+			mode: 'lines+markers',
+			marker: {
+				size: 8,
+			},
+			line: {
+				shape: 'hv',
+			},
+		};
+		for(var idx in ary) {
+			var row = ary[idx];
+			ret.x.push(row.begin.toISOString());
+			ret.y.push(convertTime(row.time));
+			ret.text.push(row.name + ': ' + row.time + " on " + row.begin.toLocaleDateString());
+		}
+		ret.x.push((new Date()).toISOString());
+		ret.y.push(ret.y[ret.y.length - 1]);
+		ret.text.push(ret.text[ret.text.length - 1]);
+		return ret;
 	}
 
-	function generateHighlighter(plot) {
-		var highlight = new Plottable.Interactions.Pointer();
-		highlight.onPointerMove(function(point) {
-			var entities = plotPlayer.entitiesIn({min: point.x, max: point.x}, {min: -9999999, max: 9999999});
-			clearHighlight();
-			if(entities.length && popupLast != entities[0]) {
-				var entity = entities[0];
-				popupLast = entity;
-				var rect = jQuery(entities[0].selection[0][0]);
-				rect.attr('stroke', 'rgba(0, 0, 0, 1.0)')
-				    .attr('stroke-width', '2px');
+	setEnds(rawData);
+	var dateSlices = getDateSlices(rawData);
+	var data = [
+		dateSlices,
+	];
 
-				var html = "Runner: " + entity.datum.name + "<br/>" +
-				           "Time: " + entity.datum.time + "<br/>" +
-				           "Date: " + entity.datum.begin.toLocaleDateString();
-				popup.css("left", zhGetMouse().x)
-				     .css("top", zhGetMouse().y)
-				     .css("display", 'block')
-				     .html(html);
-
-				jQuery('body').append(popup);
-
-				if(popupInterval) {
-					clearInterval(popupInterval);
-					popupInterval = null;
-				}
-			}
-		});
-		highlight.onPointerExit(function() {
-			popupInterval = setInterval(function() {
-				popup.css('display', 'none');
-				clearHighlight();
-			}, 500);
-		});
-		highlight.attachTo(plot);
+	/*  Calculate Y axis ticks */
+	var scaleMin = 1;
+	var maxTime = convertTime(rawData[0].time);
+	var minTime = convertTime(rawData[rawData.length - 1].time);
+	var maxTimeRoundedUp = ((Math.floor(maxTime / 60) / scaleMin) + 1) * scaleMin * 60;
+	console.log('max:' + maxTimeRoundedUp);
+	var minTimeRoundedDown = (Math.floor(minTime / 60) / scaleMin) * scaleMin * 60;
+	console.log('min:' + minTimeRoundedDown);
+	var nticks = Math.floor((maxTimeRoundedUp / 60 / scaleMin) - (minTimeRoundedDown / 60 / scaleMin) + 1);
+	console.log('nticks:' + nticks);
+	var tickVals = [];
+	var tickText = [];
+	for(var i = 0; i < nticks; ++i) {
+		var tick = i * 60 * scaleMin + minTimeRoundedDown;
+		tickVals.push(tick);
+		tickText.push(timeText(tick));
 	}
 
-	var data = rawData.slice();
-	setEnds(data);
+	while(tickVals.length > 20) {
+		for(var i = tickVals.length - 2; i > 0; i -= 2) {
+			tickVals.splice(i, 1);
+			tickText.splice(i, 1);
+		}
+	}
 
-	var playerNames = getPlayerNames(data);
-	var colorScale = new Plottable.Scales.Color();
+	var layout = {
+		title: title,
+		xaxis: {
+			title: 'Date',
+		},
+		yaxis: {
+			title: 'Time achieved',
+			tickmode: 'array',
+			tickvals: tickVals,
+			ticktext: tickText,
+			range: [tickVals[0], tickVals[tickVals.length - 1]],
+		},
+	}
 
-	var xScale = new Plottable.Scales.Time();
-	var xAxisTop = new Plottable.Axes.Time(xScale, "top");
-	var xAxisBottom = new Plottable.Axes.Time(xScale, "bottom");
+	console.log(layout);
+	Plotly.newPlot(chartSelector, data, layout);
 
-	var yScalePlayer = new Plottable.Scales.Category();
-	var yAxisPlayer = new Plottable.Axes.Category(yScalePlayer, "left");
-
-	var plotPlayer = new Plottable.Plots.Rectangle()
-	  .x(           function(d) { return d.begin; }, xScale)
-	  .x2(          function(d) { return d.end;   })
-	  .y(           function(d) { return d.name;  }, yScalePlayer)
-	  .attr("fill", function(d) { return playerNames.indexOf(d.name);  }, colorScale)
-	  .addDataset(new Plottable.Dataset(data));
-
-	var xScale = new Plottable.Scales.Time();
-	var xAxis = new Plottable.Axes.Time(xScale, "bottom");
-
-	var yScaleTime = new Plottable.Scales.Linear();
-	var yAxisTime = new Plottable.Axes.Numeric(yScaleTime, "left");
-	yAxisTime.formatter(printSecs);
-
-	var plotTime = new Plottable.Plots.Line()
-	  .x(           function(d) { return d.begin;              }, xScale)
-	  .y(           function(d) { return convertTime(d.time);  }, yScaleTime)
-	  .attr("stroke", function(d) { return "#000000"; } )
-	  .interpolator("step-after")
-	  .addDataset(new Plottable.Dataset(data));
-
-	var popupInterval;
-	var popupLast;
-	var popup = jQuery(popupSelector);
-	popup.addClass('zhpopup');
-
-	generateHighlighter(plotTime);
-	generateHighlighter(plotPlayer);
-
-	var chart = new Plottable.Components.Table([
-		[null,        xAxisTop   ],
-		[yAxisPlayer, plotPlayer ],
-		[yAxisTime,   plotTime   ],
-		[null,        xAxisBottom]
-	]);
-	chart.rowWeight(1, 1);
-	chart.rowWeight(2, 2);
-
-	chart.renderTo(chartSelector);
 }
-
-jQuery(document).ready(function() {
-	var currentMousePos = { x: -1, y: -1 };
-	$(document).mousemove(function(event) {
-		currentMousePos.x = event.pageX;
-		currentMousePos.y = event.pageY;
-	});
-	zhGetMouse = function() {
-		return currentMousePos;
-	}
-});
